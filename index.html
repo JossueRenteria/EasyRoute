@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css" /><link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css"><link rel="stylesheet" href="css/L.Control.Locate.min.css" />
+        <link rel="stylesheet" type="text/css" href="css/qgis2web.css">
+        <link rel="stylesheet" href="css/MarkerCluster.css" />
+        <link rel="stylesheet" href="css/MarkerCluster.Default.css" />
+        <link rel="stylesheet" href="css/Control.OSMGeocoder.css" />
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script><script src="js/L.Control.Locate.min.js"></script>
+        <script src="js/multi-style-layer.js"></script>
+        <script src="js/leaflet-heat.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/OSMBuildings-Leaflet.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/leaflet-tilelayer-wmts.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/Control.OSMGeocoder.js"></script>
+        <script src="js/leaflet.markercluster.js"></script>
+        <script src="data/Progreso50.js"></script>
+        <script src="data/Peita1.js"></script>
+        <script src="data/R152.js"></script>
+        <script src="data/Progreso23.js"></script>
+        <script src="data/Progreso14.js"></script>
+        <script src="data/Progreso45.js"></script>
+        <script src="data/Progreso66.js"></script>
+        <script>
+        var highlightLayer;
+        function highlightFeature(e) {
+            highlightLayer = e.target;
+            highlightLayer.openPopup();
+        }
+        L.ImageOverlay.include({
+            getBounds: function () {
+                return this._bounds;
+            }
+        });
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:27, minZoom:1
+        }).fitBounds([[21.4988563161,-104.898831899],[21.5018978879,-104.892735464]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.addAttribution('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a>');
+        L.control.locate().addTo(map);
+        var bounds_group = new L.featureGroup([]);
+        var basemap0 = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors,<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+            maxZoom: 27
+        });
+        basemap0.addTo(map);
+        function setBounds() {
+        }
+        function geoJson2heat(geojson, weight) {
+          return geojson.features.map(function(feature) {
+            return [
+              feature.geometry.coordinates[1],
+              feature.geometry.coordinates[0],
+              feature.properties[weight]
+            ];
+          });
+        }
+        function pop_Progreso50(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? Autolinker.link(String(feature.properties['id'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['p5'] !== null ? Autolinker.link(String(feature.properties['p5'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent);
+        }
+
+        function style_Progreso50_0() {
+            return {
+                pane: 'pane_Progreso50',
+                opacity: 1,
+                color: 'rgba(255,1,1,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+            }
+        }
+        function style_Progreso50_1() {
+            return {
+                pane: 'pane_Progreso50',
+            }
+        }
+        map.createPane('pane_Progreso50');
+        map.getPane('pane_Progreso50').style.zIndex = 400;
+        map.getPane('pane_Progreso50').style['mix-blend-mode'] = 'normal';
+    var layer_Progreso50 = new L.geoJson.multiStyle(json_Progreso50, {
+        attribution: '<a href=""></a>',
+        pane: 'pane_Progreso50',
+        onEachFeature: pop_Progreso50,
+        styles: [style_Progreso50_0,style_Progreso50_1,]
+    });
+        bounds_group.addLayer(layer_Progreso50);
+        function pop_Peita1(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? Autolinker.link(String(feature.properties['id'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent);
+        }
+
+        function style_Peita1_0() {
+            return {
+                pane: 'pane_Peita1',
+                opacity: 1,
+                color: 'rgba(88,250,99,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+            }
+        }
+        map.createPane('pane_Peita1');
+        map.getPane('pane_Peita1').style.zIndex = 401;
+        map.getPane('pane_Peita1').style['mix-blend-mode'] = 'normal';
+    var layer_Peita1 = new L.geoJson.multiStyle(json_Peita1, {
+        attribution: '<a href=""></a>',
+        pane: 'pane_Peita1',
+        onEachFeature: pop_Peita1,
+        styles: [style_Peita1_0,]
+    });
+        bounds_group.addLayer(layer_Peita1);
+        function pop_R152(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? Autolinker.link(String(feature.properties['id'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent);
+        }
+
+        function style_R152_0() {
+            return {
+                pane: 'pane_R152',
+                opacity: 1,
+                color: 'rgba(88,250,99,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+            }
+        }
+        map.createPane('pane_R152');
+        map.getPane('pane_R152').style.zIndex = 402;
+        map.getPane('pane_R152').style['mix-blend-mode'] = 'normal';
+    var layer_R152 = new L.geoJson.multiStyle(json_R152, {
+        attribution: '<a href=""></a>',
+        pane: 'pane_R152',
+        onEachFeature: pop_R152,
+        styles: [style_R152_0,]
+    });
+        bounds_group.addLayer(layer_R152);
+        function pop_Progreso23(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? Autolinker.link(String(feature.properties['id'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent);
+        }
+
+        function style_Progreso23_0() {
+            return {
+                pane: 'pane_Progreso23',
+                opacity: 1,
+                color: 'rgba(88,250,99,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+            }
+        }
+        map.createPane('pane_Progreso23');
+        map.getPane('pane_Progreso23').style.zIndex = 403;
+        map.getPane('pane_Progreso23').style['mix-blend-mode'] = 'normal';
+    var layer_Progreso23 = new L.geoJson.multiStyle(json_Progreso23, {
+        attribution: '<a href=""></a>',
+        pane: 'pane_Progreso23',
+        onEachFeature: pop_Progreso23,
+        styles: [style_Progreso23_0,]
+    });
+        bounds_group.addLayer(layer_Progreso23);
+        function pop_Progreso14(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? Autolinker.link(String(feature.properties['id'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent);
+        }
+
+        function style_Progreso14_0() {
+            return {
+                pane: 'pane_Progreso14',
+                opacity: 1,
+                color: 'rgba(88,250,99,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+            }
+        }
+        map.createPane('pane_Progreso14');
+        map.getPane('pane_Progreso14').style.zIndex = 404;
+        map.getPane('pane_Progreso14').style['mix-blend-mode'] = 'normal';
+    var layer_Progreso14 = new L.geoJson.multiStyle(json_Progreso14, {
+        attribution: '<a href=""></a>',
+        pane: 'pane_Progreso14',
+        onEachFeature: pop_Progreso14,
+        styles: [style_Progreso14_0,]
+    });
+        bounds_group.addLayer(layer_Progreso14);
+        function pop_Progreso45(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? Autolinker.link(String(feature.properties['id'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent);
+        }
+
+        function style_Progreso45_0() {
+            return {
+                pane: 'pane_Progreso45',
+                opacity: 1,
+                color: 'rgba(88,250,99,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+            }
+        }
+        map.createPane('pane_Progreso45');
+        map.getPane('pane_Progreso45').style.zIndex = 405;
+        map.getPane('pane_Progreso45').style['mix-blend-mode'] = 'normal';
+    var layer_Progreso45 = new L.geoJson.multiStyle(json_Progreso45, {
+        attribution: '<a href=""></a>',
+        pane: 'pane_Progreso45',
+        onEachFeature: pop_Progreso45,
+        styles: [style_Progreso45_0,]
+    });
+        bounds_group.addLayer(layer_Progreso45);
+        function pop_Progreso66(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? Autolinker.link(String(feature.properties['id'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent);
+        }
+
+        function style_Progreso66_0() {
+            return {
+                pane: 'pane_Progreso66',
+                opacity: 1,
+                color: 'rgba(88,250,99,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+            }
+        }
+        map.createPane('pane_Progreso66');
+        map.getPane('pane_Progreso66').style.zIndex = 406;
+        map.getPane('pane_Progreso66').style['mix-blend-mode'] = 'normal';
+    var layer_Progreso66 = new L.geoJson.multiStyle(json_Progreso66, {
+        attribution: '<a href=""></a>',
+        pane: 'pane_Progreso66',
+        onEachFeature: pop_Progreso66,
+        styles: [style_Progreso66_0,]
+    });
+        bounds_group.addLayer(layer_Progreso66);
+        var osmGeocoder = new L.Control.OSMGeocoder({
+            collapsed: false,
+            position: 'topright',
+            text: 'Search',
+        });
+        osmGeocoder.addTo(map);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<img src="legend/Progreso66.png" /> Progreso 6': layer_Progreso66,'<img src="legend/Progreso45.png" /> Progreso 4': layer_Progreso45,'<img src="legend/Progreso14.png" /> Progreso 1': layer_Progreso14,'<img src="legend/Progreso23.png" /> Progreso 2': layer_Progreso23,'<img src="legend/R152.png" /> R-15': layer_R152,'<img src="legend/Peita1.png" /> Peñita': layer_Peita1,'<img src="legend/Progreso50.png" /> Progreso 5': layer_Progreso50,}).addTo(map);
+        setBounds();
+        </script>
+    </body>
+</html>
